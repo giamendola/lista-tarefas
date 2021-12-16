@@ -1,0 +1,73 @@
+﻿@model PaginatedList<ListaTarefas.Models.Tarefa>
+
+@{
+    ViewData["Title"] = "Gerenciador de Tarefas";
+}
+
+<h1>Gerenciador de Tarefas</h1>
+
+<p>
+    <a asp-action="Create">Criar nova tarefa</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Procurar por Descrição: <input type="text" name="SearchString" value="@ViewData["FiltroAtual"]" />
+            <input type="submit" value="Buscar" class="btn btn-default" /> |
+            <a asp-action="Index">Voltar Listagem Completa Padrão</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["OrganizarPorDesc"]" asp-route-currentFilter="@ViewData["FiltroAtual"]">Descrição</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["OrganizarPorData"]" asp-route-currentFilter="@ViewData["FiltroAtual"]">Data de Criação</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data_criacao)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["OrgazinacaoAtual"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["FiltroAtual"]"
+   class="btn btn-default @prevDisabled">
+    Anterior
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["OrgazinacaoAtual"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["FiltroAtual"]"
+   class="btn btn-default @nextDisabled">
+    Próximo
+</a>
