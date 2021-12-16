@@ -2,9 +2,9 @@
 Projeto C# MVC afim de estudo
 
 - Como importar o projeto?
-i) Clonar o repositório para sua máquina.
-ii) Abrir a solução e compilar a mesma.
-iii) Rodar o projeto
+- 1) Clonar o repositório para sua máquina.
+- 2) Abrir a solução e compilar a mesma.
+- 3) Rodar o projeto
 
 O projeto está o mais simples possível a quesito de entendimento. O banco de dados utilizado é o MySQL, utilizando o serviço RDS da Amazon.
 Todo o projeto foi construído em cima do projeto base "Aplicativo Web do ASP.NET Core(MVC)" do Visual Studio.
